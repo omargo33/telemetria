@@ -22,6 +22,11 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       TZ: "America/Guayaquil"
+    healthcheck:
+      test: ["CMD", "kafka-topics", "--bootstrap-server", "localhost:9092", "--list"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
@@ -86,8 +91,8 @@ services:
       timeout: 10s
       retries: 5
     # Descomenta el volumen para plugins
-    volumes:
-      - ./connect-plugins:/etc/kafka-connect/jars
+    # volumes:
+    #   - ./connect-plugins:/etc/kafka-connect/jars
 
   metabase:
     image: metabase/metabase:latest
