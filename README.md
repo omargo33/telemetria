@@ -21,4 +21,4 @@ username: root
 password: example
 database: testTelemetria
 
-
+source ~/.bashrc 17

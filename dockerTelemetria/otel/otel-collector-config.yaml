@@ -1,0 +1,17 @@
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: 0.0.0.0:4318
+
+exporters:
+  kafka:
+    brokers: ["kafka:9092"]
+    topic: "audit-telemetry"
+    encoding: otlp_json
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      exporters: [kafka]
