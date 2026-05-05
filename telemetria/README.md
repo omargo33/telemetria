@@ -34,6 +34,15 @@ Para ejecutar la aplicación, se debe ejecutar el siguiente comando en la termin
 mvn spring-boot:run
 ```
 
+## Testar la aplicación
+
+Para validar la aplicación, se pueden ejecutar los siguientes comandos en la terminal:
+
+```bash
+curl -X GET http://localhost:8100/telemetria/0.0.1/health
+curl -X GET http://localhost:8100/telemetria/0.0.1/actuator/health
+```
+
 >**NOTA:** 
 >
 >Los log del producto se obtienen de manera estándar en la consola de la aplicación.
