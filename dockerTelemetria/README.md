@@ -73,7 +73,9 @@ docker compose up -d
 
 **Registrar el conector de Kafka Connect**: Una vez que los servicios estén en funcionamiento, ejecuta el siguiente comando para registrar el conector que enviará las trazas a MongoDB:
 
+```bash
 ./register-connector.sh
+```
 
 **Acceder a las interfaces**:
 - Kafka UI: http://localhost:9021
