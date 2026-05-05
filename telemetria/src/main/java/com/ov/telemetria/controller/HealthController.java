@@ -1,17 +1,24 @@
 package com.ov.telemetria.controller;
 
-import com.ov.telemetria.annotation.Traceable;
-import lombok.extern.slf4j.Slf4j;
+import java.time.LocalDateTime;
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
-import java.util.Map;
+import com.ov.telemetria.annotation.Traceable;
 
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * Controlador REST para verificar el estado de salud del servicio
+ * 
+ * @author omargo33
+ */
 @Slf4j
 @RestController
-@Traceable  // Traza todos los métodos del controlador
+@Traceable
 public class HealthController {
 
     @GetMapping("/health")

@@ -22,3 +22,12 @@ password: example
 database: testTelemetria
 
 source ~/.bashrc 17
+
+
+```mermaid
+architecture-beta
+    service user(mdi:account)
+    service lambda(logos:aws-lambda)
+
+    user:R --> L:lambda
+```

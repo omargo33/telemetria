@@ -1,4 +1,6 @@
 services:
+
+  ## Zookeeper, Kafka y Kafka UI
   zookeeper:
     image: confluentinc/cp-zookeeper:7.4.0
     environment:
@@ -40,13 +42,14 @@ services:
       - KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper:2181
       - TZ=America/Guayaquil
 
+  ## MongoDB, Kafka Connect y Metabase
   mongodb:
     image: mongo:6.0
     ports:
       - "27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
       TZ: "America/Guayaquil"
     volumes:
       - mongo_data:/data/db
@@ -83,17 +86,14 @@ services:
       CONNECT_MONGO_HOST: mongodb
       CONNECT_MONGO_PORT: 27017
       CONNECT_MONGO_USER: root
-      CONNECT_MONGO_PASSWORD: example      
+      CONNECT_MONGO_PASSWORD: ${MONGO_PASSWORD}
       TZ: "America/Guayaquil"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8083/connectors"]
       interval: 30s
       timeout: 10s
       retries: 5
-    # Descomenta el volumen para plugins
-    # volumes:
-    #   - ./connect-plugins:/etc/kafka-connect/jars
-
+    
   metabase:
     image: metabase/metabase:latest
     depends_on:
@@ -106,6 +106,7 @@ services:
     volumes:
       - metabase_data:/metabase-data
 
+  ## OpenTelemetry Collector
   otel-collector:    
     image: otel/opentelemetry-collector-contrib:0.93.0
     command: ["--config=/etc/otel-collector-config.yaml"]
@@ -119,6 +120,7 @@ services:
     depends_on:
       - kafka
 
+## Volúmenes para persistencia de datos
 volumes:
   mongo_data:
   metabase_data:
